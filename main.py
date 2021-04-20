@@ -12,9 +12,10 @@ logger.info = print
 
 class SnakeAndLadder(object):
 
-    def __init__(self):
-        self._position = 0
+    def __init__(self, isCrookedDice = False) -> None:
         self._snakes = {14: 7}
+        self._position = 0
+        self._isCrookedDice = isCrookedDice
 
     def _move(self, rollValue = 0) -> None:
         logger.info(f"Current position on board: {self._position}")
@@ -36,9 +37,8 @@ class SnakeAndLadder(object):
             self._position = self._snakes[self._position]
             logger.info(f"New position on board: {self._position}")
 
-    @staticmethod
-    def _diceRoll() -> int:
-        val = randrange(1, 7)
+    def _diceRoll(self) -> int:
+        val = randrange(1, 7) if not self._isCrookedDice else randrange(2, 7, 2)
         logger.info(f"Dice roll value: {val}")
         return val
 
@@ -57,7 +57,8 @@ class SnakeAndLadder(object):
 
 
 def main():
-    res = SnakeAndLadder().play()
+    print("Press 1 for 'Normal Dice' and 2 for 'Crooked Dice'")
+    res = SnakeAndLadder(int(input()) == 2).play()
     logger.info(f"Result: {res}")
     logger.info("Thanks for playing. Visit again..! :)")
 
