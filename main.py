@@ -14,6 +14,7 @@ class SnakeAndLadder(object):
 
     def __init__(self):
         self._position = 0
+        self._snakes = {14: 7}
 
     def _move(self, rollValue = 0) -> None:
         logger.info(f"Current position on board: {self._position}")
@@ -26,6 +27,14 @@ class SnakeAndLadder(object):
         time.sleep(1)
         self._position += rollValue
         logger.info(f"New position on board: {self._position}")
+        # check if you landed on a snake
+        self._snakeCheck()
+
+    def _snakeCheck(self) -> None:
+        if self._position in self._snakes:
+            logger.info("Oh wait!! You got bit by a snake!")
+            self._position = self._snakes[self._position]
+            logger.info(f"New position on board: {self._position}")
 
     @staticmethod
     def _diceRoll() -> int:
