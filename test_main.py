@@ -27,5 +27,5 @@ class TestSnakeAndLadder(TestCase):
         self.assertLogs("Current position on board: 95")
         self.assertLogs(f"Sorry, you need 5 or less to move..", level='info')
 
-    #def test_play(self):
-     #   self.fail()
+    def test_play(self):
+        self.assertIsInstance(self._game.play(), str)
