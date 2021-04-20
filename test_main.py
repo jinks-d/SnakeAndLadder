@@ -1,15 +1,15 @@
-from unittest import TestCase
+from unittest import mock, TestCase
 from main import SnakeAndLadder
 
 
 class TestSnakeAndLadder(TestCase):
 
-    def setUp(self) -> None:
+    def setUp(self):
         self._game = SnakeAndLadder()
 
     def test_init(self):
-        self.assertEqual(self._game._position, 0)
         self.assertEqual(self._game._snakes, {14: 7})
+        self.assertEqual(self._game._position, 0)
 
     def test_diceRoll(self):
         res = self._game._diceRoll()
@@ -45,5 +45,6 @@ class TestSnakeAndLadder(TestCase):
         self.assertLogs("Current position on board: 95", level='info')
         self.assertLogs(f"Sorry, you need 5 or less to move..", level='info')
 
-    def test_play(self):
+    @mock.patch("main.SnakeAndLadder._getUserInput", return_value=True)
+    def test_play(self, userInput):
         self.assertIsInstance(self._game.play(), str)
