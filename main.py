@@ -20,6 +20,8 @@ class SnakeAndLadder(object):
         # initialize
         self._snakes = {14: 7}
         self._position = 0
+        self._greenSnakes = {12: 5}
+        self._isBitByGreen = False
         self._isCrookedDice = None
 
     def _move(self, rollValue = 0) -> None:
@@ -53,6 +55,11 @@ class SnakeAndLadder(object):
             # reset position to snake's tail
             self._position = self._snakes[self._position]
             logger.info(f"New position on board: {self._position}")
+        elif self._position in self._greenSnakes and not self._isBitByGreen:
+            logger.info("Oh wait!! You got bit by a green snake. Visit again without fear! :)")
+            self._position = self._greenSnakes[self._position]
+            logger.info(f"New position on board: {self._position}")
+            self._isBitByGreen = True
 
     def _diceRoll(self) -> int:
         """
