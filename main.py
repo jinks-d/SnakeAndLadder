@@ -15,7 +15,7 @@ class SnakeAndLadder(object):
     def __init__(self) -> None:
         """
 
-        :param bool isCrookedDice: Tells if we are using a Crooked dice or a Normal dice
+        :return: None
         """
         # initialize
         self._snakes = {14: 7}
@@ -89,7 +89,7 @@ class SnakeAndLadder(object):
         """
         Prompts to the user for a choice of dice
 
-        :return:
+        :return: bool
         """
         print("""
                 We have 2 types of dice, a Normal and a Crooked one.
